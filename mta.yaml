@@ -1,0 +1,24 @@
+ID: CDS_Employee_Address
+_schema-version: '2.0'
+version: 0.0.1
+modules:
+  - name: user_db
+    type: hdb
+    path: user_db
+    requires:
+      - name: hdi_user_db
+  - name: node
+    type: nodejs
+    path: node
+    provides:
+      - name: node_api
+        properties:
+          url: '${default-url}'
+    requires:
+      - name: hdi_user_db
+      - name: user_db
+resources:
+  - name: hdi_user_db
+    properties:
+      hdi-container-name: '${service-name}'
+    type: com.sap.xs.hdi-container
